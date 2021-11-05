@@ -1,0 +1,31 @@
+---
+- name: Create MySQL Server Instance
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Set account
+      shell: gcloud config set account {{ account }}
+    - name: Create config
+      shell: gcloud config set project {{ project }}
+    - name: Activate serviceaccount
+      shell: gcloud auth activate-service-account {{ account }} --key-file=key.json
+    - name: Create the instance
+      shell: gcloud compute instances create {{ instance }} --source-instance-template {{ template }} --zone {{ zone }}
+#    - name: create a config
+#      google.cloud.gcp_runtimeconfig_config:
+#        name: default
+#        description: My config
+#        project: "{{ project }}"
+#        auth_kind: serviceaccount
+#        service_account_file: "key.json"
+#        state: present
+#    - name: create the instance
+#      google.cloud.gcp_compute_instance:
+#        name: "{{ instance }}"
+#        project: "{{ project }}"
+#        zone: "{{ zone }}"
+#        source_instance_template: "{{ template }}"
+#        auth_kind: serviceaccount
+#        service_account_file: "key.json"
+#        state: present

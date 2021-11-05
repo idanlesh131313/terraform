@@ -1,0 +1,5 @@
+account: 657928707647-compute@developer.gserviceaccount.com
+project: modern-tangent-331205
+template: mysql-server-template
+instance: mysql-server-1
+zone: us-central1-a
